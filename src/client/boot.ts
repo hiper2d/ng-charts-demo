@@ -14,6 +14,9 @@ import '@angular/router';
 // RxJS
 import 'rxjs/Observable';
 
+// Charts.js
+import 'chart.js/src/chart.js'
+
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 import {BootModule} from "./boot.module";
 
