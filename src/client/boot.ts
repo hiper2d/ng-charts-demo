@@ -17,6 +17,8 @@ import 'rxjs/Observable';
 // Charts.js
 import 'chart.js/src/chart.js'
 
+import '../public/reset.css';
+
 import {platformBrowserDynamic} from "@angular/platform-browser-dynamic";
 import {BootModule} from "./boot.module";
 

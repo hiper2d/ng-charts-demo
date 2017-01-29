@@ -1,5 +1,5 @@
 var path = require('path');
-var _root = path.resolve(__dirname, '..');
+var _root = path.resolve(__dirname);
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -32,11 +32,13 @@ module.exports = {
             },
             {
                 test: /\.css$/,
+                include: root('src', 'client'),
                 loader: 'raw'
             },
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style!css', 'css?sourceMap')
+                include: root('src', 'public'),
+                loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
             }
         ]
     },

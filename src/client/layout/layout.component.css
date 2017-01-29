@@ -1,0 +1,11 @@
+header {
+    background: #ea4335;
+    box-shadow: 0 6px 22px 0 #9d9da5;
+    box-sizing: border-box;
+    color: #fbfbfb;
+    height: 70px;
+    line-height: 70px;
+    padding: 0 5%;
+    position: fixed;
+    width: 100%;
+}

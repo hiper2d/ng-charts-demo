@@ -2,7 +2,7 @@ import {Component} from "@angular/core";
 
 @Component({
     selector: '.linear',
-    templateUrl: 'linear.component.html'
+    templateUrl: './linear.component.html'
 })
 export class LinearComponent {
     public barChartOptions:any = {
