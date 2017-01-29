@@ -31,9 +31,18 @@ module.exports = {
                 loader: 'html'
             },
             {
-                test: /\.css$/,
+                test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot)$/,
+                loader: 'file?name=[name].[hash].[ext]'
+            },
+            // {
+            //     test: /\.css$/,
+            //     include: root('src', 'client'),
+            //     loader: 'raw'
+            // },
+            {
+                test: /\.scss$/,
                 include: root('src', 'client'),
-                loader: 'raw'
+                loader: 'raw!sass'
             },
             {
                 test: /\.css$/,

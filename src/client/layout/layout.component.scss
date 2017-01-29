@@ -1,0 +1,32 @@
+@import "../vars";
+
+header {
+    background: $header-color;
+    box-shadow: 0 6px 22px 0 #9d9da5;
+    box-sizing: border-box;
+    clear: both;
+    color: $header-text-color;
+    height: $header-height;
+    line-height: 70px;
+    padding: 0 5%;
+    position: fixed;
+    width: 100%;
+
+    span {
+        display: inline-block;
+        height: $header-height;
+        float: left;
+        width: 70px;
+
+        img {
+            vertical-align: middle;
+        }
+    }
+}
+
+.content {
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-top: $header-height;
+    width: 100%;
+}

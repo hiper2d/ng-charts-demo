@@ -1,4 +1,7 @@
 <header>
+  <span><img [src]="menuIconSrc" (click)="toggleMenu()"/></span>
   <h1>Carts.js + Angular 2</h1>
 </header>
-<router-outlet></router-outlet>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
