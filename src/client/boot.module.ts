@@ -7,20 +7,24 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import {BootRoutingModule} from "./boot.routing";
 import {LayoutComponent} from "./layout/layout.component";
 import {ContentComponent} from "./layout/content/content.component";
-import {LinearComponent} from "./layout/content/linear/linear.component";
+import {ChartjsComponent} from "./layout/content/chartjs/chartjs.component";
+import {HighchartsComponent} from "./layout/content/highcharts/highcharts.component";
+import {D3Component} from "./layout/content/d3/d3.component";
 
 
 @NgModule({
     imports: [
-	      BootRoutingModule,
+        BootRoutingModule,
         BrowserModule,
         ChartsModule,
         HttpModule
     ],
     declarations: [
+        ChartjsComponent,
         ContentComponent,
-        LayoutComponent,
-        LinearComponent
+        D3Component,
+        HighchartsComponent,
+        LayoutComponent
     ],
     bootstrap: [LayoutComponent],
 })

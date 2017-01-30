@@ -1,22 +1,52 @@
 import {Component} from "@angular/core";
 
 @Component({
-    selector: '.linear',
-    templateUrl: './linear.component.html'
+    selector: '.chartjs',
+    templateUrl: './chartjs.component.html'
 })
-export class LinearComponent {
+export class ChartjsComponent {
     public barChartOptions:any = {
         scaleShowVerticalLines: false,
-        responsive: true
+        responsive: true,
+        legend: {
+            position: 'top',
+            labels: {
+                boxWidth: 100,
+            }
+        },
+        scales: {
+            xAxes: [{
+                stacked: true
+            }],
+            yAxes: [{
+                stacked: true
+            }]
+        }
     };
     public barChartLabels:string[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
     public barChartType:string = 'bar';
     public barChartLegend:boolean = true;
     
-    public barChartData:any[] = [
+    public barChartData:any[] = /*[
         {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
         {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-    ];
+    ];*/
+        [{
+            data: [65, 59, 80, 81, 56, 55, 40],
+            backgroundColor: "rgba(63,103,126,1)",
+            hoverBackgroundColor: "rgba(50,90,100,1)",
+            label: 'A'
+        },{
+            data: [28, 48, 40, 19, 86, 27, 90],
+            backgroundColor: "rgba(163,103,126,1)",
+            hoverBackgroundColor: "rgba(140,85,100,1)",
+            label: 'A'
+        },{
+            data: [66, 58, 84, 81, 56, 55, 40],
+            backgroundColor: "rgba(63,203,226,1)",
+            hoverBackgroundColor: "rgba(46,185,235,1)",
+            label: 'C'
+        }];
     
     // events
     public chartClicked(e:any):void {
