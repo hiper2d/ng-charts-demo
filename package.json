@@ -1,7 +1,7 @@
 {
   "name": "ng-charts-demo",
   "version": "1.0.0",
-  "description": "Playing with Chart.js, Highcharts.js, D3.js in Angular 2",
+  "description": "Playing with Chart.js, Highcharts, D3.js in Angular 2",
   "scripts": {
     "start": "webpack-dev-server --colors --watch --port 3001 --content-base src/public --inline --hot"
   },

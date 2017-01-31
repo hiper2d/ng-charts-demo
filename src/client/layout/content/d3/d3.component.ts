@@ -1,13 +1,18 @@
-import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {Component, ElementRef, OnChanges, OnInit, ViewChild} from "@angular/core";
 import * as d3 from "d3";
 
+// Stacked Grouped Bar Charts examples:
+// http://stackoverflow.com/questions/36770503/grouped-multiple-stacked-bar-chart
+// http://bl.ocks.org/gencay/4629518
+
+//todo: make svg responsive
 
 @Component({
     selector: '.d3',
     templateUrl: './d3.component.html',
     styleUrls: ['./d3.component.scss']
 })
-export class D3Component implements OnInit {
+export class D3Component implements OnInit, OnChanges {
     @ViewChild('chart') private chartContainer: ElementRef;
     private data: Array<any>;
     private margin: any = { top: 20, bottom: 20, left: 20, right: 20};
