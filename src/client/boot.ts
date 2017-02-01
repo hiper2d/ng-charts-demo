@@ -16,7 +16,6 @@ import 'rxjs/Observable';
 
 // Charts.js
 import 'chart.js/src/chart.js'
-import 'highcharts/adapters/standalone-framework.src';
 
 import '../public/reset.css';
 

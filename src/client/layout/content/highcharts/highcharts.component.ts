@@ -2,6 +2,8 @@ import {AfterViewInit, Component, ElementRef, OnDestroy, ViewChild} from "@angul
 
 const Highcharts = require('highcharts/highcharts.src');
 
+// Zooming example: http://jsfiddle.net/P45Hy/3/
+
 @Component({
     selector: '.highcharts',
     templateUrl: './highcharts.component.html'
