@@ -2,6 +2,13 @@
   <span><img [src]="menuIconSrc" (click)="toggleMenu()"/></span>
   <h1>Carts.js / Highcharts / D3.js + Angular 2</h1>
 </header>
+<nav class="menu">
+  <ul>
+    <a routerLink="/charts/chartjs" class="menu-item" routerLinkActive="menu-item-active">Chart.js</a>
+    <a routerLink="/charts/highcharts" class="menu-item" routerLinkActive="menu-item-active">Highchars</a>
+    <a routerLink="/charts/d3" class="menu-item" routerLinkActive="menu-item-active">D3.js</a>
+  </ul>
+</nav>
 <div class="content">
   <router-outlet></router-outlet>
 </div>

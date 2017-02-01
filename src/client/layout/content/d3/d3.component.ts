@@ -1,5 +1,4 @@
-import {Component, ElementRef, OnChanges, OnInit, ViewChild} from "@angular/core";
-import * as d3 from "d3";
+import {Component, OnInit} from "@angular/core";
 
 // D3 tutorials https://github.com/d3/d3/wiki/Tutorials
 

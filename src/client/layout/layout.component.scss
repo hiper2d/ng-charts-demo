@@ -28,5 +28,20 @@ header {
     margin: 0 auto;
     box-sizing: border-box;
     padding-top: $header-height;
-    width: 100%;
+}
+
+.menu {
+    box-sizing: border-box;
+    float: left;
+    height: 100%;
+    padding-top: $header-height;
+    width: 100px;
+}
+
+.menu-item {
+
+}
+
+.menu-item-active {
+
 }
