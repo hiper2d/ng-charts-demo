@@ -6,7 +6,7 @@ import {Component, OnInit} from "@angular/core";
 // http://stackoverflow.com/questions/36770503/grouped-multiple-stacked-bar-chart
 // http://bl.ocks.org/gencay/4629518
 
-//todo: make svg responsive
+// Bands in bands example: https://bl.ocks.org/mbostock/3887051 Should be useful for my case
 
 @Component({
     selector: '.d3',
@@ -14,7 +14,5 @@ import {Component, OnInit} from "@angular/core";
     styleUrls: ['./d3.component.scss']
 })
 export class D3Component implements OnInit {
-
-    ngOnInit(): void {
-    }
+    ngOnInit(): void { }
 }

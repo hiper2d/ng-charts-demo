@@ -1,6 +1,7 @@
 .d3-chart {
+  height: 100%;
+  min-height: 400px;
   width: 100%;
-  height: 400px;
 }
 
 .d3-chart .axis path,
@@ -10,4 +11,11 @@
 
 .d3-chart .axis text {
   fill: #999;
+}
+
+.bar {
+  display: inline-block;
+  width: 20px;
+  height: 75px; /* Will be overridden */
+  background-color: teal;
 }

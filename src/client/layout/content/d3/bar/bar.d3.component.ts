@@ -9,7 +9,7 @@ import * as d3 from "d3";
 export class BarD3Component implements OnInit, OnChanges {
     @ViewChild('chart') private chartContainer: ElementRef;
     private data: Array<any>;
-    private margin: any = { top: 20, bottom: 20, left: 20, right: 20};
+    private margin: any = { top: 40, bottom: 40, left: 40, right: 40};
     private chart: any;
     private width: number;
     private height: number;
@@ -33,6 +33,14 @@ export class BarD3Component implements OnInit, OnChanges {
             this.updateChart();
         }
     }
+    
+    drawBarChart() {
+        this.generateData();
+        let element = this.chartContainer.nativeElement;
+        let svg = d3.select(element).append('svg')
+			    .attr('viewBox','0 0 '+element.offsetWidth+' '+element.offsetHeight)
+			    .attr('preserveAspectRatio','xMinYMin');
+    }
 
     createChart() {
         this.generateData();
@@ -42,26 +50,21 @@ export class BarD3Component implements OnInit, OnChanges {
         let svg = d3.select(element).append('svg')
                 .attr('viewBox','0 0 '+element.offsetWidth+' '+element.offsetHeight)
                 .attr('preserveAspectRatio','xMinYMin')
-            // .attr('width', element.offsetWidth)
-            // .attr('height', element.offsetHeight)
         ;
 
         // chart plot area
-        this.chart = svg.append('g')
-            .attr('class', 'bars')
-            .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
-        ;
+        this.chart = svg.append('g').attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
 
         // define X & Y domains
         let xDomain = this.data.map(d => d[0]);
         let yDomain = [0, d3.max(this.data, d => d[1])];
 
         // create scales
-        this.xScale = d3.scaleBand().padding(0.1).domain(xDomain).rangeRound([0, this.width]);
+        this.xScale = d3.scaleBand().padding(0.2).domain(xDomain).rangeRound([0, this.width]);
         this.yScale = d3.scaleLinear().domain(yDomain).range([this.height, 0]);
 
         // bar colors
-        this.colors = d3.scaleLinear().domain([0, this.data.length]).range(<any[]>['red', 'blue']);
+        this.colors = d3.scaleLinear().domain([0, this.data.length]).range(<any[]>['yellow', 'green']);
 
         // x & y axis
         this.xAxis = svg.append('g')
