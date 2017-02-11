@@ -38,6 +38,10 @@ module.exports = {
                 loader: 'html-loader'
             },
             {
+                test: /\.csv$/,
+                loader: 'raw-loader'
+            },
+            {
                 test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot)$/,
                 loader: 'file-loader?name=[name].[hash].[ext]'
             },

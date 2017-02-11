@@ -1,126 +1,87 @@
 import {Component, ElementRef, OnChanges, OnInit, ViewChild} from "@angular/core";
-import * as d3 from "d3";
+
+import {D3, D3Service, Selection} from 'd3-ng2-service';
+import {DSVParsedArray} from "d3-dsv";
 
 @Component({
-    selector: '.d3bar',
-    template: '<div class="d3-chart" #chart></div>',
-    styleUrls: ['bar.d3.component.scss']
+	selector: '.d3bar',
+	template: '<svg></svg>',
+	styleUrls: ['bar.d3.component.scss']
 })
 export class BarD3Component implements OnInit, OnChanges {
-    @ViewChild('chart') private chartContainer: ElementRef;
-    private data: Array<any>;
-    private margin: any = { top: 40, bottom: 40, left: 40, right: 40};
-    private chart: any;
-    private width: number;
-    private height: number;
-    private xScale: any;
-    private yScale: any;
-    private colors: any;
-    private xAxis: any;
-    private yAxis: any;
-
-    constructor() { }
-
-    ngOnInit() {
-        this.createChart();
-        if (this.data) {
-            this.updateChart();
-        }
-    }
-
-    ngOnChanges() {
-        if (this.chart) {
-            this.updateChart();
-        }
-    }
-    
-    drawBarChart() {
-        this.generateData();
-        let element = this.chartContainer.nativeElement;
-        let svg = d3.select(element).append('svg')
-			    .attr('viewBox','0 0 '+element.offsetWidth+' '+element.offsetHeight)
-			    .attr('preserveAspectRatio','xMinYMin');
-    }
-
-    createChart() {
-        this.generateData();
-        let element = this.chartContainer.nativeElement;
-        this.width = element.offsetWidth - this.margin.left - this.margin.right;
-        this.height = element.offsetHeight - this.margin.top - this.margin.bottom;
-        let svg = d3.select(element).append('svg')
-                .attr('viewBox','0 0 '+element.offsetWidth+' '+element.offsetHeight)
-                .attr('preserveAspectRatio','xMinYMin')
-        ;
-
-        // chart plot area
-        this.chart = svg.append('g').attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
-
-        // define X & Y domains
-        let xDomain = this.data.map(d => d[0]);
-        let yDomain = [0, d3.max(this.data, d => d[1])];
-
-        // create scales
-        this.xScale = d3.scaleBand().padding(0.2).domain(xDomain).rangeRound([0, this.width]);
-        this.yScale = d3.scaleLinear().domain(yDomain).range([this.height, 0]);
-
-        // bar colors
-        this.colors = d3.scaleLinear().domain([0, this.data.length]).range(<any[]>['yellow', 'green']);
-
-        // x & y axis
-        this.xAxis = svg.append('g')
-            .attr('class', 'axis axis-x')
-            .attr('transform', `translate(${this.margin.left}, ${this.margin.top + this.height})`)
-            .call(d3.axisBottom(this.xScale));
-        this.yAxis = svg.append('g')
-            .attr('class', 'axis axis-y')
-            .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`)
-            .call(d3.axisLeft(this.yScale));
-    }
-
-    updateChart() {
-        // update scales & axis
-        this.xScale.domain(this.data.map(d => d[0]));
-        this.yScale.domain([0, d3.max(this.data, d => d[1])]);
-        this.colors.domain([0, this.data.length]);
-        this.xAxis.transition().call(d3.axisBottom(this.xScale));
-        this.yAxis.transition().call(d3.axisLeft(this.yScale));
-
-        let update = this.chart.selectAll('.bar').data(this.data);
-
-        // remove exiting bars
-        update.exit().remove();
-
-        // update existing bars
-        this.chart.selectAll('.bar').transition()
-            .attr('x', d => this.xScale(d[0]))
-            .attr('y', d => this.yScale(d[1]))
-            .attr('width', d => this.xScale.bandwidth())
-            .attr('height', d => this.height - this.yScale(d[1]))
-            .style('fill', (d, i) => this.colors(i));
-
-        // add new bars
-        update
-            .enter()
-            .append('rect')
-            .attr('class', 'bar')
-            .attr('x', d => this.xScale(d[0]))
-            .attr('y', d => this.yScale(0))
-            .attr('width', this.xScale.bandwidth())
-            .attr('height', 0)
-            .style('fill', (d, i) => this.colors(i))
-            .transition()
-            .delay((d, i) => i * 10)
-            .attr('y', d => this.yScale(d[1]))
-            .attr('height', d => this.height - this.yScale(d[1]));
-    }
-
-    generateData() {
-        this.data = [];
-        for (let i = 0; i < (8 + Math.floor(Math.random() * 10)); i++) {
-            this.data.push([
-                `Index ${i}`,
-                Math.floor(Math.random() * 100)
-            ]);
-        }
-    }
+	private data: any;
+	private margin: any = {top: 40, bottom: 40, left: 40, right: 40};
+	private parentNativeElement: any;
+	private d3: D3;
+	private d3Svg: Selection<SVGSVGElement, any, null, undefined>;
+	
+	constructor(private element: ElementRef, private _d3Service: D3Service) {
+		this.parentNativeElement = element.nativeElement;
+		this.d3 = _d3Service.getD3();
+	}
+	
+	ngOnInit() {
+		let d3: D3 = this.d3;
+		this.data = require('./data.csv');
+		let svgParentElement: Selection<HTMLElement, any, null, undefined>;
+		let d3G: Selection<SVGGElement, any, null, undefined>;
+		
+		if (this.parentNativeElement !== null) {
+			svgParentElement = d3.select(this.parentNativeElement);
+			this.d3Svg = svgParentElement.select<SVGSVGElement>('svg');
+			
+			let width = this.parentNativeElement.offsetWidth - this.margin.left - this.margin.right;
+			let height = this.parentNativeElement.offsetHeight - this.margin.top - this.margin.bottom;
+			this.d3Svg.attr('viewBox', '0 0 ' + this.parentNativeElement.offsetWidth + ' ' + this.parentNativeElement.offsetHeight)
+			this.d3Svg.attr('preserveAspectRatio', 'xMinYMin');
+			
+			d3G = this.d3Svg.append<SVGGElement>('g');
+			d3G.attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+			
+			let parsedData: DSVParsedArray<any> = d3.csvParse(this.data);
+			let keys = parsedData.columns.slice(1);
+			//console.log(parsedData);
+			
+			let x0 = d3.scaleBand()
+				.domain(parsedData.map(d => d.State))
+				.rangeRound([0, width])
+				.paddingInner(0.1);
+			let x1 = d3.scaleBand()
+				.domain(keys)
+				.rangeRound([0, x0.bandwidth()])
+				.padding(0.05);
+			let y = d3.scaleLinear()
+				.domain([0, d3.max(parsedData, d => d3.max(keys, key => +d[key]))])
+				.nice()
+				.rangeRound([height, 0]);
+			let colors = d3.scaleOrdinal().range([
+				"#98abc5",
+				"#8a89a6",
+				"#7b6888",
+				"#6b486b",
+				"#a05d56",
+				"#d0743c",
+				"#ff8c00"
+			]);
+			
+			d3G.selectAll("g")
+				.data(parsedData)
+				.enter().append("g")
+				.attr("transform", d => "translate(" + x0(d.State) + ",0)")
+				.selectAll('rect')
+				.data(d => keys.map(key => {
+					return {key: key, value: d[key]}
+				}))
+				.enter().append("rect")
+				.attr("x", d => x1(d.key))
+				.attr("y", d => y(d.value))
+				.attr("width", x1.bandwidth())
+				.attr("height", d => height - y(d.value))
+			;
+		}
+	}
+	
+	ngOnChanges() {
+		
+	}
 }

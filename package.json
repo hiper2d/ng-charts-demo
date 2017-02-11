@@ -17,7 +17,7 @@
 
     "ng2-charts": "1.5.0",
     "highcharts": "5.0.7",
-    "d3": "^4.5.0",
+    "d3-ng2-service": "^1.5.2",
 
     "core-js": "^2.4.1",
     "rxjs": "^5.0.3",
@@ -31,6 +31,7 @@
     "angular2-template-loader": "^0.6.0",
     "awesome-typescript-loader": "^3.0.0-beta.18",
     "css-loader": "^0.23.1",
+    "dsv-loader": "^2.0.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.5",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.16.1",

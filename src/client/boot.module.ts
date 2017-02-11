@@ -13,6 +13,7 @@ import {D3Component} from "./layout/content/d3/d3.component";
 import {BarD3Component} from "./layout/content/d3/bar/bar.d3.component";
 import {BarchartDirective} from "./directives/barchart.directive";
 
+import {D3Service} from 'd3-ng2-service';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import {BarchartDirective} from "./directives/barchart.directive";
         HighchartsComponent,
         LayoutComponent
     ],
+    providers: [D3Service],
     bootstrap: [LayoutComponent],
 })
 export class BootModule { }
