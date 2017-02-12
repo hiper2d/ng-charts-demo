@@ -3,19 +3,3 @@
   min-height: 400px;
   width: 100%;
 }
-
-.axis path,
-.axis line {
-  stroke: #999;
-}
-
-.axis text {
-  fill: #999;
-}
-
-.bar {
-  display: inline-block;
-  width: 20px;
-  height: 75px; /* Will be overridden */
-  background-color: teal;
-}
