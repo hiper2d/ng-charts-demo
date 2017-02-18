@@ -158,7 +158,8 @@ export class BarD3Component implements OnInit, OnChanges {
 			.attr("y", d => this.yScale(d.value))
 			.attr("width", this.xGroupScale.bandwidth())
 			.attr("height", d => this.height - this.yScale(d.value))
-			.attr("fill", d => this.colorGroupScale(d.key));
+			.attr("fill", d => this.colorGroupScale(d.key))
+			.on('click', d => console.log(this.d3.event));
 	}
 	
 	private splitAndSum(array) {

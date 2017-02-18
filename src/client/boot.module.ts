@@ -11,7 +11,6 @@ import {ChartjsComponent} from "./layout/content/chartjs/chartjs.component";
 import {HighchartsComponent} from "./layout/content/highcharts/highcharts.component";
 import {D3Component} from "./layout/content/d3/d3.component";
 import {BarD3Component} from "./layout/content/d3/bar/bar.d3.component";
-import {BarchartDirective} from "./directives/barchart.directive";
 
 import {D3Service} from 'd3-ng2-service';
 
@@ -24,7 +23,6 @@ import {D3Service} from 'd3-ng2-service';
     ],
     declarations: [
         BarD3Component,
-        BarchartDirective,
         ChartjsComponent,
         ContentComponent,
         D3Component,
